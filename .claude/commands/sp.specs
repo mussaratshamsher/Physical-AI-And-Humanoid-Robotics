@@ -1,0 +1,18 @@
+---
+command: specs
+display_name: Specifications Overview
+---
+
+## Specifications Overview
+
+This command provides an overview of the key specifications for the project. Each specification details the requirements and design for a specific feature or component.
+
+### Available Specifications:
+
+*   **`textbook-generation.spec.md`**: Defines the complete specification for building the AI-native textbook interactive UI and layout, including book structure, technical requirements, and optional features.
+
+To view a specific specification, use a command like:
+`/show .specify/textbook-generation.spec.md`
+
+To generate a new specification, use the `sp.specify` command:
+`/sp.specify`

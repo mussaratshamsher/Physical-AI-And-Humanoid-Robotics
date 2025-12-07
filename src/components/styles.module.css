@@ -1,0 +1,63 @@
+.featureCard {
+  margin-bottom: 2rem;
+  height: 100%;
+  animation: floatCard 0.8s ease forwards;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.featureCard :global(.card) {
+  height: 100%;
+  overflow: hidden;
+  border-radius: 16px; /* smoother than 8px */
+  box-shadow: 0 0 8px rgba(108, 99, 255, 0.4);
+  transition: all 0.4s ease;
+}
+
+/* ===== Equal image size ===== */
+.featureCard :global(.card__image img) {
+  width: 100%;
+  height: 220px; 
+  object-fit: cover;
+  transition: all 0.4s ease-in-out;
+  transform: scale(1);
+}
+
+/* ===== Image zoom + blur on hover ===== */
+.featureCard:hover :global(.card__image img) {
+  transform: scale(1.08);
+}
+
+/* ===== Glow effect on hover ===== */
+.featureCard:hover :global(.card) {
+  box-shadow: 
+    0 0 8px #6b73ff,
+    0 0 16px #6b73ff,
+    0 0 32px rgba(107, 115, 255, 0.6);
+}
+
+/* ===== Floating effect ===== */
+.featureCard:hover {
+  transform: translateY(-8px);
+}
+
+/* ===== Title color (kept from your version) ===== */
+.featureCard :global(.card__header h3 a) {
+  color: #0056b3;
+}
+
+/* ===== Padding (kept from your version) ===== */
+.featureCard :global(.card__header) {
+  padding-top: 1rem;
+}
+
+/* ===== Entry animation ===== */
+@keyframes floatCard {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

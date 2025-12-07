@@ -1,0 +1,66 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #0734e9;
+  --ifm-color-primary-dark: #0734e9;
+  --ifm-color-primary-darker: #0734e9;
+  --ifm-color-primary-darkest: #0734e9;
+  --ifm-color-primary-light: #0734e9;
+  --ifm-color-primary-lighter: #0734e9;
+  --ifm-color-primary-lightest: #0734e9;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #2b54f9;
+  --ifm-color-primary-dark: #2b54f9;
+  --ifm-color-primary-darker: #2b54f9;
+  --ifm-color-primary-darkest: #2b54f9;
+  --ifm-color-primary-light: #2b54f9;
+  --ifm-color-primary-lighter: #2b54f9;
+  --ifm-color-primary-lightest: #2b54f9;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* Custom styles for a clean and professional UI */
+html, body {
+  font-family: 'Inter', sans-serif; /* Example font, replace if needed */
+}
+
+a {
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-bottom 0.3s ease;
+}
+
+a:hover {
+  border-bottom: 1px solid currentColor;
+}
+
+.card {
+  box-shadow: var(--ifm-global-shadow-md);
+  border-radius: var(--ifm-card-border-radius);
+}
+
+.navbar__brand {
+  display: flex;
+  align-items: center;
+}
+
+.navbar__title {
+  margin-left: 0.5rem;
+}
+
+/* Custom dropdown styles */
+.custom-dropdown-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+

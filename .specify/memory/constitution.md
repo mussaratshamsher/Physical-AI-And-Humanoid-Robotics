@@ -1,55 +1,68 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+# [Project]
+Name: "Physical AI & Humanoid Robotics"
+Type: "AI-Native Textbook"
 
-## Core Principles
+# [Purpose]
+The primary purpose of this project is to create a short, clean, and professional AI-Native textbook based on the "Physical AI & Humanoid Robotics" course. The textbook must serve as a fast, simple, and high-quality learning resource, presented through a modern and customized Docusaurus user interface.
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+# [Scope]
+The project scope is defined by the following components:
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+## Content:
+A concise textbook consisting of six chapters:
+1. Introduction to Physical AI
+2. Basics of Humanoid Robotics
+3. ROS 2 Fundamentals
+4. Digital Twin Simulation (Gazebo + Isaac)
+5. Vision-Language-Action Systems
+6. Capstone: Simple AI-Robot Pipeline
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+## User Interface:
+- A clean, minimalist, and professional UI built on Docusaurus.
+- The design should prioritize readability and ease of navigation.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+## Technical Specifications:
+- **Deployment:** The final textbook will be deployed on Vercel.
+- **Embeddings:** The project will use lightweight or minimal embeddings to stay within free-tier limitations.
+- **Translation:** Optional support for Urdu translation and other personalization features may be explored if time and resources permit.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+# [Core Principles]
+All work on this project must adhere to the following principles:
+- **Simplicity:** Prioritize clarity and conciseness in both content and design. Avoid unnecessary complexity.
+- **Accuracy:** Ensure all technical information is correct, up-to-date, and well-researched.
+- **Minimalism:** Keep the design, features, and dependencies to a minimum to ensure a lightweight and focused experience.
+- **Fast Builds:** Optimize the development process and technology stack for rapid build and deployment cycles.
 
-### [PRINCIPLE_6_NAME]
+# [Key Features]
+- Docusaurus-based textbook structure.
+- Seamless deployment and continuous integration with Vercel.
+- A modern, customized UI for an enhanced reading experience.
+- Optional features for personalization, such as Urdu translation.
 
+# [Constraints]
+- **No Heavy GPU Usage:** The final product and development workflow must not require heavy GPU resources.
+- **Minimal Embeddings:** Keep the use of embeddings to a minimum to align with the principle of minimalism and free-tier compatibility.
+- **Free-Tier Friendly:** All technologies and services used should ideally fit within free-tier plans to minimize costs.
 
-[PRINCIPLE__DESCRIPTION]
+# [Success Criteria]
+The project will be considered successful upon meeting the following criteria:
+- **Build Success:** The Docusaurus project builds without errors.
+- **Clean UI:** The final textbook has a polished, professional, and uncluttered user interface.
+- **Smooth Vercel Deployment:** The project is successfully and smoothly deployed to a public Vercel URL.
+- **Content Completion:** All six chapters are written and published.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+# [Style and Conventions]
+- **Code:** Adhere to standard formatting and linting rules for JavaScript/TypeScript and React. Maintain a clean and organized codebase.
+- **Content:** Write in a clear, professional, and accessible tone suitable for a technical textbook. Use Markdown for all content.
+- **UI:** The UI should be modern, responsive, and consistent with the minimalist aesthetic.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+# [Tools and Technologies]
+- **Framework:** Docusaurus
+- **Deployment:** Vercel
+- **Simulation (for content):** Gazebo, NVIDIA Isaac Sim
+- **Robotics Framework (for content):** ROS 2
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
-
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
-
-## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
-
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
-
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+# [Deployment Strategy]
+- **Source Control:** All code will be hosted in a GitHub repository.
+- **Continuous Deployment (CI/CD):** Vercel will be connected to the GitHub repository. Any push or merge to the `main` branch will automatically trigger a new build and deployment on Vercel.
+- **Domain:** The final textbook will be accessible via a Vercel-provided URL (`.vercel.app`).
