@@ -1,17 +1,82 @@
 .bookCoverContainer {
-  padding: 2rem;
+  margin-top: 5px;
+  padding: 4rem 2rem;
   text-align: center;
+  border-radius: 20px;
+
+  /* Glassmorphism + depth */
+  background: linear-gradient(135deg, #0f172a, #5d83bf);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+
+  /* Centering + spacing */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
+/* Main Title */
 .title {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #00008b; 
-  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff;
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #e0f2fe;
+
+  /* Premium glow effect */
+  text-shadow:
+    0 0 10px rgba(56, 189, 248, 0.8),
+    0 0 20px rgba(56, 189, 248, 0.6),
+    0 0 40px rgba(56, 189, 248, 0.4);
+
+  margin-bottom: 1.5rem;
 }
 
+/* Subtitle / paragraph */
 .paragraph {
-  font-size: 1.1rem;
-  margin: 1.5rem auto;
-  max-width: 800px;
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #cbd5e1;
+  margin: 1rem auto 2rem;
+  max-width: 850px;
+}
+
+/* Add a nice divider under title */
+.title::after {
+  content: "";
+  display: block;
+  width: 120px;
+  height: 4px;
+  background: linear-gradient(90deg, #38bdf8, #6366f1);
+  margin: 1rem auto 0;
+  border-radius: 4px;
+}
+
+/* Optional button style (if you add one later) */
+.ctaButton {
+  margin-top: 1.5rem;
+  padding: 12px 28px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #38bdf8, #6366f1);
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ctaButton:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(56, 189, 248, 0.5);
+}
+
+/* Responsive fix */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.2rem;
+  }
+
+  .paragraph {
+    font-size: 1rem;
+  }
 }

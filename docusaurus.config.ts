@@ -7,15 +7,13 @@ const config: Config = {
   tagline: 'An AI-Native Textbook',
   favicon: 'img/favicon.jpg',
 
-  future: {
-    v4: true,
-  },
-
   url: 'https://your-docusaurus-site.example.com', // Will be set by Vercel
   baseUrl: '/',
 
-  organizationName: 'your-github-org', // CHANGE THIS
-  projectName: 'humanoid-robotics-textbook', // CHANGE THIS
+  organizationName: 'mussaratshamsher', 
+  projectName: 'Physical-AI-And-Humanoid-Robotics',
+
+  deploymentBranch: 'main',
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -31,7 +29,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          editUrl: 'https://github.com/your-github-org/humanoid-robotics-textbook/tree/main/', // CHANGE THIS
+          editUrl: 'https://github.com/mussaratshamsher/Physical-AI-And-Humanoid-Robotics/tree/main/',
         },
         blog: false, // Disable the blog feature
         theme: {
@@ -59,13 +57,13 @@ const config: Config = {
           position: 'left',
           label: 'Textbook',
         },
+        // {
+        //   to: '/docs/author',
+        //   label: 'About the Author',
+        //   position: 'right',
+        // },
         {
-          to: '/docs/author',
-          label: 'About the Author',
-          position: 'right',
-        },
-        {
-          href: 'https://github.com/your-github-org/humanoid-robotics-textbook', // CHANGE THIS
+          href: 'https://github.com/mussaratshamsher/Physical-AI-And-Humanoid-Robotics',
           label: 'GitHub',
           position: 'right',
         },
@@ -97,7 +95,7 @@ const config: Config = {
           items: [
             {
               label: 'GitHub',
-              href: 'https://github.com/your-github-org/humanoid-robotics-textbook', // CHANGE THIS
+              href: 'https://github.com/mussaratshamsher/Physical-AI-And-Humanoid-Robotics',
             },
           ],
         },

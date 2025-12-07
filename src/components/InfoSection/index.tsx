@@ -34,26 +34,28 @@ const InfoSection = () => {
               <p>
                 This textbook is open-source and community-driven. Your contributions are welcome!
               </p>
-              <Link className="button button--secondary button--sm" to="/docs/community-contributions">
+              <Link className="button button--secondary button--sm" to="/docs/intro">
                 Learn How to Contribute
               </Link>
             </div>
           </div>
-
-          {/* About the Author */}
-          <div className="col col--4">
-            <Link to="/docs/author" className={styles.infoCardLink}>
-              <div className={styles.infoCard}>
-                <svg xmlns="http://www.w3.org/2000/svg" className={styles.icon} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-                <h3 className={styles.title}>About the Author</h3>
-                <p>
-                  Learn more about the author, Mussarat Shamsher.
-                </p>
-              </div>
-            </Link>
-          </div>
+          
+          {/* About the Author - This section is commented out until the author page is created */}
+          
+            <div className="col col--4">
+              <Link to="/docs/author" className={styles.infoCardLink}>
+                <div className={styles.infoCard}>
+                  <svg xmlns="http://www.w3.org/2000/svg" className={styles.icon} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                  <h3 className={styles.title}>About the Author</h3>
+                  <p>
+                    Learn more about the author, Mussarat Shamsher.
+                  </p>
+                </div>
+              </Link>
+            </div>
+         
         </div>
       </div>
     </div>

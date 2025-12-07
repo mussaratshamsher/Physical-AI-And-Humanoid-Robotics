@@ -26,12 +26,12 @@ No prior experience in robotics is required, but a basic understanding of progra
 
 The textbook is organized into six chapters, each building on the previous one to provide a complete learning experience:
 
-1. **[Chapter 1: An Introduction to Physical AI](/docs/01-intro-to-physical-ai)** - Explores the core principles of embodied AI, differentiating it from traditional AI and introducing the perceive-reason-act cycle.
-2. **[Chapter 2: Basics of Humanoid Robotics](/docs/02-basics-of-humanoid-robotics)** - Covers humanoid anatomy, locomotion, and manipulation, with a focus on bipedal walking and whole-body control.
-3. **[Chapter 3: ROS2 Fundamentals](/docs/03-ros2-fundamentals)** - Introduces the Robot Operating System 2, teaching communication, nodes, topics, and services for building modular robot systems.
-4. **[Chapter 4: Digital Twin Simulation](/docs/04-digital-twin-simulation)** - Delves into simulation environments like NVIDIA Isaac Sim, enabling safe testing and development of complex behaviors.
-5. **[Chapter 5: Vision-Language-Action Systems](/docs/05-vision-language-action-systems)** - Integrates perception and language models for advanced human-robot interaction and task understanding.
-6. **[Chapter 6: Capstone Autonomous Humanoid Robot Project](/docs/06-capstone-project)** - Culminates in a hands-on project, synthesizing all concepts into a fully autonomous humanoid system.
+1. **[Chapter 1: An Introduction to Physical AI](/docs/intro-to-physical-ai)** - Explores the core principles of embodied AI, differentiating it from traditional AI and introducing the perceive-reason-act cycle.
+2. **[Chapter 2: Basics of Humanoid Robotics](/docs/basics-of-humanoid-robotics)** - Covers humanoid anatomy, locomotion, and manipulation, with a focus on bipedal walking and whole-body control.
+3. **[Chapter 3: ROS2 Fundamentals](/docs/ros2-fundamentals-of-robotics)** - Introduces the Robot Operating System 2, teaching communication, nodes, topics, and services for building modular robot systems.
+4. **[Chapter 4: Digital Twin Simulation](/docs/digital-twin-simulation)** - Delves into simulation environments like NVIDIA Isaac Sim, enabling safe testing and development of complex behaviors.
+5. **[Chapter 5: Vision-Language-Action Systems](/docs/vision-language-action-system)** - Integrates perception and language models for advanced human-robot interaction and task understanding.
+6. **[Chapter 6: Capstone Autonomous Humanoid Robot Project](/docs/capstone-project)** - Culminates in a hands-on project, synthesizing all concepts into a fully autonomous humanoid system.
 
 Each chapter includes:
 - **Key Takeaways**: Summarizing core concepts.
