@@ -10,7 +10,7 @@ const config: Config = {
   url: 'https://your-docusaurus-site.example.com', // Will be set by Vercel
   baseUrl: '/',
 
-  organizationName: 'mussaratshamsher', 
+  organizationName: 'mussaratshamsher',
   projectName: 'Physical-AI-And-Humanoid-Robotics',
 
   deploymentBranch: 'main',
@@ -55,7 +55,7 @@ const config: Config = {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
           position: 'left',
-          label: 'Textbook',
+          label: 'Chapters',
         },
         // {
         //   to: '/docs/author',
@@ -69,39 +69,7 @@ const config: Config = {
         },
       ],
     },
-    footer: {
-      style: 'dark',
-      links: [
-        {
-          title: 'Textbook',
-          items: [
-            {
-              label: 'Introduction',
-              to: '/docs/intro',
-            },
-          ],
-        },
-        {
-          title: 'Community',
-          items: [
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus', // Example link
-            },
-          ],
-        },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'GitHub',
-              href: 'https://github.com/mussaratshamsher/Physical-AI-And-Humanoid-Robotics',
-            },
-          ],
-        },
-      ],
-      copyright: `Copyright © ${new Date().getFullYear()} Physical AI & Humanoid Robotics. Built with Docusaurus.`,
-    },
+    // Footer is now handled by a custom component
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
