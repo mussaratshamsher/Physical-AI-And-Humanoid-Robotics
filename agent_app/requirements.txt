@@ -1,9 +1,0 @@
-fastapi
-uvicorn[standard]
-qdrant-client
-google-generativeai
-python-dotenv
-pydantic
-requests
-aiohttp
-sse-starlette

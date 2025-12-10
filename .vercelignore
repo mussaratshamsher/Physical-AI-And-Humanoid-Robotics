@@ -1,0 +1,11 @@
+# .vercelignore - exclude Python-related directories and files
+agent_app/
+api/
+agent_requirements.txt
+requirements.txt
+ingest.py
+.env
+.env.production
+.venv/
+__pycache__/
+*.py
