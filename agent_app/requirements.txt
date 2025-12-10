@@ -1,6 +1,10 @@
 fastapi
-uvicorn
+uvicorn[standard]
 qdrant-client
+openai-agents
 google-generativeai
 python-dotenv
 pydantic
+requests
+aiohttp
+sse-starlette

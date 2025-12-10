@@ -23,6 +23,10 @@ async def get_embeddings(text: str) -> List[float]:
 async def rag_search(query: str) -> str:
     """
     Performs a RAG search on the Qdrant collection using the user query.
+    Use this tool to find relevant context from the Humanoid Robotics textbook
+    to answer a user's question. The input should be the user's original question.
+    The tool will return relevant text chunks from the book.
+
     Returns the top 3 chunk texts as context.
     """
     try:
@@ -48,4 +52,3 @@ async def rag_search(query: str) -> str:
     except Exception as e:
         print(f"Error during RAG search: {e}")
         return f"An error occurred during RAG search: {e}"
-

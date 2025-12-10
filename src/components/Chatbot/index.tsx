@@ -28,7 +28,9 @@ const Chatbot: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:8000/agent/chat', { // Assuming your FastAPI is on 8000
+      // Get the backend URL from environment or use default
+      const backendUrl = process.env.REACT_APP_AGENT_API_URL || 'http://localhost:8000';
+      const response = await fetch(`${backendUrl}/agent/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

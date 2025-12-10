@@ -1,3 +1,6 @@
+---
+sidebar_position: 3
+---
 # Chapter 02: Basics of Humanoid Robotics
 
 ## Introduction

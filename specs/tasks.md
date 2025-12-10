@@ -1,3 +1,4 @@
+# Phase- 1
 ---
 description: "Task list for implementing the AI-Native Textbook UI & Layout"
 ---
@@ -76,3 +77,78 @@ description: "Task list for implementing the AI-Native Textbook UI & Layout"
 3.  Complete Phase 3: User Story 2.
 4.  Complete Phase 4: Polish.
 5.  Validate the final build and deployment.
+
+# Phase-2
+---
+description: "Task list for implementing AI-Powered Interactive Features."
+---
+
+# Tasks: AI-Powered Interactive Features
+
+**Input**: `specs/plan.md`
+**Prerequisites**: `specs/plan.md` (required), `constitution.md` (required)
+
+---
+
+## Phase 1: Core RAG Backend
+
+**Goal**: Create a functional backend service that can ingest the textbook content and answer questions about it.
+
+### Sub-Phase 1.1: Environment Setup
+- [x] T001: Create `requirements.txt` with `fastapi`, `qdrant-client`, `google-generativeai`, etc.
+- [x] T002: Create a Python virtual environment at `.venv/`.
+- [x] T003: Install all dependencies from `requirements.txt` into the virtual environment.
+- [x] T004: Create the `.env` file to store API keys for Qdrant and Gemini.
+- [x] T005: Add `.venv/` and `.env` to the `.gitignore` file.
+
+### Sub-Phase 1.2: Content Ingestion
+- [x] T006: Create the `ingest.py` script.
+- [x] T007: **[P1]** Populate the `.env` file with valid `QDRANT_URL`, `QDRANT_API_KEY`, and `GEMINI_API_KEY`.
+- [x] T008: **[P1]** In `ingest.py`, finalize the logic to read all markdown files, chunk them, and generate embeddings.
+- [x] T009: **[P1]** Execute the `ingest.py` script and verify that the `humanoid_robotics_textbook` collection is created and populated in your Qdrant Cloud dashboard.
+
+### Sub-Phase 1.3: FastAPI Backend
+- [x] T010: **[P1]** Create the directory `api/` and the file `api/index.py`.
+- [x] T011: **[P1]** In `api/index.py`, set up a basic FastAPI application.
+- [x] T012: **[P1]** Implement the `/api/chat` streaming endpoint. This includes:
+    - Receiving the user's query.
+    - Generating an embedding for the query.
+    - Searching Qdrant for relevant context.
+    - Constructing a prompt for the Gemini model.
+    - Calling the Gemini API and streaming the response.
+- [ ] T013: **[P2]** Test the `/api/chat` endpoint locally to ensure it returns a valid, streamed response.
+
+---
+
+## Phase 2: Frontend Integration
+
+**Goal**: Connect the Docusaurus frontend to the RAG backend to create a seamless chat experience.
+
+- [ ] T014: **[P1]** Create a new React component at `src/components/Chatbot/index.tsx`.
+- [ ] T015: **[P1]** Build the UI for the chatbot, including the message display area, user input field, and send button.
+- [ ] T016: **[P2]** Implement state management in the component for the conversation history and loading status.
+- [ ] T017: **[P1]** Write the client-side `fetch` request to call the `/api/chat` endpoint.
+- [ ] T018: **[P1]** Implement logic to handle the streamed response from the backend and display it in the UI.
+- [ ] T019: **[P2]** "Swizzle" the Docusaurus layout to add a floating button that toggles the visibility of the chatbot component.
+
+---
+
+## Phase 3: Advanced Features & Deployment
+
+**Goal**: Add the translation and personalization features, and deploy the entire application.
+
+- [ ] T020: **[P2]** Implement a `/api/translate` endpoint in the FastAPI application.
+- [ ] T021: **[P3]** Add a "Translate" button to the UI that calls the new endpoint.
+- [ ] T022: **[P3]** Create a `Quiz` component to ask users about their interests.
+- [ ] T023: **[P3]** Implement logic to highlight text in `DocItem` based on interests stored in `localStorage`.
+- [ ] T024: **[P3]** Configure and enable Algolia DocSearch in `docusaurus.config.ts`.
+- [ ] T025: **[P1]** Configure `vercel.json` to correctly build both the Docusaurus frontend and the Python serverless functions.
+- [ ] T026: **[P1]** Deploy the project to Vercel and perform end-to-end testing.
+
+---
+
+## Dependencies & Execution Order
+
+- **Phase 1 (Backend)** must be completed before **Phase 2 (Frontend)**.
+- **Phase 3 (Advanced Features)** can be worked on in parallel after Phase 2 begins, but deployment is the final step.
+- The `[Px]` tags indicate priority (P1 = High, P2 = Medium, P3 = Low).

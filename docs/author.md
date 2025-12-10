@@ -1,4 +1,5 @@
 ---
+sidebar_position: 0
 title: About the Author
 sidebar_label: About the Author
 ---

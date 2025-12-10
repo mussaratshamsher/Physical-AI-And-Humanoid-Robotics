@@ -1,48 +1,46 @@
-from typing import AsyncGenerator
-import google.generativeai as genai
+from agents import Agent, Runner, AsyncOpenAI, RunConfig, OpenAIChatCompletionsModel
 from app.config import Config
-from app.tools import rag_search # Import the rag_search tool
+from app.tools import rag_search
 
-class TextbookTutorAgent:
-    def __init__(self):
-        genai.configure(api_key=Config.GOOGLE_API_KEY)
-        self.model = genai.GenerativeModel(Config.GENERATIVE_MODEL)
+# 1. Configure the LLM (Gemini via OpenAI-compatible endpoint)
+# This client points to Google's API but uses the OpenAI library structure,
+# which is what the `openai-agents` SDK expects.
+external_client = AsyncOpenAI(
+    api_key=Config.GEMINI_API_KEY,
+    base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
+)
 
-    async def run(self, query: str) -> AsyncGenerator[str, None]:
-        # 1. ALWAYS call rag_search first
-        context = await rag_search(query)
+# 2. Define the model for the agent to use
+model = OpenAIChatCompletionsModel(
+    model=Config.MODEL_NAME,  # e.g., "gemini-1.5-flash"
+    openai_client=external_client
+)
 
-        # 2. Construct the prompt with the retrieved context
-        if context == "No relevant context found.":
-            yield "I cannot answer this question as no relevant information was found in the textbook."
-            return
-        elif "An error occurred during RAG search:" in context:
-            yield f"An error occurred while retrieving context: {context}"
-            return
+# 3. Create the agent with instructions and tools
+# The agent will use the `rag_search` function when it needs to find
+# information from the textbook to answer a question.
+textbook_tutor_agent = Agent(
+    name="TextbookTutor",
+    instructions=(
+        "You are a helpful AI assistant and expert tutor for a Humanoid Robotics textbook. "
+        "Your goal is to answer the user's questions based on the content of the book. "
+        "First, use the `rag_search` tool with the user's question to find relevant context from the textbook. "
+        "Then, use the retrieved context to formulate a clear, concise, and accurate answer. "
+        "If the context does not contain the answer, state that the information is not available in the textbook. "
+        "Do not use any prior knowledge outside of the provided context."
+    ),
+    tools=[rag_search]
+)
 
-        prompt = (
-            f"You are a helpful tutor for a Humanoid Robotics textbook. "
-            f"Answer the following question STRICTLY from the provided context. "
-            f"Do NOT use any outside knowledge. If the answer is not in the context, "
-            f"state that you cannot answer based on the provided information.\n\n"
-            f"Context:\n{context}\n\n"
-            f"Question: {query}\n\n"
-            f"Answer:"
-        )
+# 4. Define the runner configuration
+run_config = RunConfig(
+    model=model,
+    model_provider=external_client,
+    tracing_disabled=True  # Set to False for debugging if needed
+)
 
-        try:
-            response = await self.model.generate_content_async(
-                prompt,
-                stream=True,
-                generation_config=genai.GenerationConfig(
-                    temperature=0.01, # Keep temperature low for factual answers
-                )
-            )
-
-            async for chunk in response:
-                yield chunk.text
-
-        except Exception as e:
-            print(f"Error during agent response generation: {e}")
-            yield f"An error occurred while generating a response: {e}"
-
+async def run_agent(query: str) -> str:
+    """Runs the agent with the given query and returns the final output."""
+    result = await Runner.run(textbook_tutor_agent, input=query, run_config=run_config)
+    # The `openai-agents` Runner doesn't stream the final answer, it returns a complete result.
+    return result.final_output

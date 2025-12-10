@@ -1,43 +1,69 @@
-/**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
- */
-
 .heroBanner {
-  padding: 8rem 0; /* Increased padding for more height */
-  text-align: center;
   position: relative;
+  height: 85vh;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
 }
 
 .heroBannerWithImage {
-  background-image: url('/img/hero.jpg');
-  background-size: cover;
-  background-position: center;
-  min-height: 500px; /* Added min-height for the image */
-  color: #00008b; /* Dark blue color for light theme */
-  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff; /* White glow effect */ 
 }
 
-html[data-theme='dark'] .heroBannerWithImage {
-  color: #00008b; /* Dark blue color for dark theme */
+/* Background Image */
+.heroBannerImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
 }
 
-.hero__title, .hero__subtitle {
-  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff; /* Enhanced white glow effect */
+/* Dark overlay for text readability */
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(60, 58, 128, 0.55),rgba(64, 61, 245, 0.55),
+  );
+  z-index: 2;
 }
 
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
-  }
+/* Content on top of everything */
+.heroContent {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  color: #020b47;
+  padding: 0 1rem;
+ text-shadow:
+    0 0 10px rgba(221, 238, 246, 0.8),
+    0 0 20px rgba(246, 248, 249, 0.918),
+    0 0 40px rgba(241, 244, 245, 0.912);
+}
+
+.hero__title {
+  font-size: 3rem;
+  text-shadow: 0 4px 12px rgba(229, 232, 245, 0.6);
+}
+
+.hero__subtitle {
+  font-size: 1.2rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
 }
 
 .buttons {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 1.5rem;
 }
+
+/* ============================= */
+/* ✅ FEATURE CARDS SECTION */
+/* ============================= */
 
 .features {
   padding-top: 2rem;
@@ -46,6 +72,7 @@ html[data-theme='dark'] .heroBannerWithImage {
 .featureCard {
   height: 100%;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
+  animation: floatCard 0.8s ease forwards;
 }
 
 .featureCard :global(.card) {
@@ -53,38 +80,38 @@ html[data-theme='dark'] .heroBannerWithImage {
   border-radius: 16px;
   overflow: hidden;
   transition: all 0.4s ease;
-  box-shadow: 0 0 8px rgba(108, 99, 255, 0.4);
+  box-shadow: 0 0 8px rgba(62, 84, 226, 0.4);
 }
 
-/* ✅ Fix equal image height */
-.featureCard :global(.card__image img) {
+/* Equal image height */
+.featureCard
+  :global(.card__image)
+  :global(div[class*='docusaurus-plugin-ideal-image']) {
   width: 100%;
-  height: 220px;           /* fixed height for equal cards */
-  object-fit: cover;       /* keeps aspect ratio */
+  height: 220px;
   transition: all 0.4s ease;
   transform: scale(1);
 }
 
-/* ✅ Image scale + blur on hover */
-.featureCard:hover :global(.card__image img) {
+/* Image zoom and slight blur */
+.featureCard:hover
+  :global(.card__image)
+  :global(div[class*='docusaurus-plugin-ideal-image']) {
   transform: scale(1.08);
   filter: blur(1px);
 }
 
-/* ✅ Glowing border effect */
+/* Glow effect */
 .featureCard:hover :global(.card) {
-  box-shadow: 
-    0 0 8px #6b73ff,
-    0 0 16px #6b73ff,
-    0 0 32px rgba(107, 115, 255, 0.6);
+  box-shadow: 0 0 8px #3f47f0, 0 0 16px #353ba1,
+    0 0 32px rgba(37, 47, 240, 0.6);
 }
 
-/* ✅ Floating animation on hover */
 .featureCard:hover {
   transform: translateY(-8px);
 }
 
-/* ✅ Smooth card entrance animation */
+/* Card entrance animation */
 @keyframes floatCard {
   0% {
     opacity: 0;
@@ -96,9 +123,9 @@ html[data-theme='dark'] .heroBannerWithImage {
   }
 }
 
-.featureCard {
-  animation: floatCard 0.8s ease forwards;
-}
+/* ============================= */
+/* ✅ OVERVIEW HEADING */
+/* ============================= */
 
 .overviewHeading {
   color: blue;
@@ -109,7 +136,23 @@ html[data-theme='dark'] .heroBannerWithImage {
 }
 
 .overviewHeading:hover {
-  color: #4169E1; /* Royal blue for a subtle change */
-  text-shadow: 2px 2px 6px rgba(128, 128, 128, 0.8); /* Slightly enhanced shadow */
-  transform: translateY(-2px); /* Subtle lift effect */
+  color: #4169e1;
+  text-shadow: 2px 2px 6px rgba(128, 128, 128, 0.8);
+  transform: translateY(-2px);
+}
+
+/* ✅ MOBILE RESPONSIVE */
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    height: 70vh;
+    padding: 2rem 1rem;
+  }
+
+  .hero__title {
+    font-size: 2.1rem;
+  }
+
+  .hero__subtitle {
+    font-size: 1rem;
+  }
 }

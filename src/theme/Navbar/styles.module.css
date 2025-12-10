@@ -1,0 +1,55 @@
+/**
+ * CSS custom properties used in the Docusaurus theme
+ */
+:root {
+  --ifm-navbar-height: 3.75rem; /* Increased from 3.5rem for better visual balance */
+  --ifm-navbar-background-color: var(--ifm-background-color);
+  --ifm-navbar-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+  --ifm-navbar-item-padding-horizontal: 0.8rem;
+  --ifm-navbar-item-padding-vertical: 0.5rem;
+  --ifm-color-primary: #307bb3; /* A pleasant blue for primary elements */
+}
+
+/* Dark mode adjustments */
+html[data-theme='dark'] {
+  --ifm-navbar-background-color: var(--ifm-background-color);
+  --ifm-navbar-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.animatedNavbar {
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  background-color: var(--ifm-navbar-background-color);
+  box-shadow: var(--ifm-navbar-shadow);
+}
+
+.navbarHideable {
+  transition: transform 0.3s ease-in-out;
+}
+
+.navbarHidden {
+  transform: translateY(-100%);
+}
+
+.navbar__title {
+  font-weight: 600; /* Make title slightly bolder */
+  font-size: 1.1rem;
+}
+
+.navbar__item:hover {
+  transform: translateY(-2px); /* Subtle lift on hover */
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Adjust padding for a cleaner look */
+.navbar__items {
+  padding: 0 0.5rem;
+}
+
+.navbar__brand {
+  padding: 0.5rem 1rem; /* Adjust padding around logo/title */
+}
+
+/* Adjust color mode toggle */
+.colorModeToggle {
+  margin-left: 1rem;
+}

@@ -1,3 +1,6 @@
+---
+sidebar_position: 7
+---
 # Chapter 06: Capstone Project – Building an Intelligent Humanoid Assistant
 
 ![Humanoid AI Architecture](/img/chap1.jpg)
