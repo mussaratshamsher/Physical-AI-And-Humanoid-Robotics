@@ -1,46 +1,63 @@
-from agents import Agent, Runner, AsyncOpenAI, RunConfig, OpenAIChatCompletionsModel
+import google.generativeai as genai
 from app.config import Config
 from app.tools import rag_search
+import asyncio
 
-# 1. Configure the LLM (Gemini via OpenAI-compatible endpoint)
-# This client points to Google's API but uses the OpenAI library structure,
-# which is what the `openai-agents` SDK expects.
-external_client = AsyncOpenAI(
-    api_key=Config.GEMINI_API_KEY,
-    base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
-)
-
-# 2. Define the model for the agent to use
-model = OpenAIChatCompletionsModel(
-    model=Config.MODEL_NAME,  # e.g., "gemini-1.5-flash"
-    openai_client=external_client
-)
-
-# 3. Create the agent with instructions and tools
-# The agent will use the `rag_search` function when it needs to find
-# information from the textbook to answer a question.
-textbook_tutor_agent = Agent(
-    name="TextbookTutor",
-    instructions=(
-        "You are a helpful AI assistant and expert tutor for a Humanoid Robotics textbook. "
-        "Your goal is to answer the user's questions based on the content of the book. "
-        "First, use the `rag_search` tool with the user's question to find relevant context from the textbook. "
-        "Then, use the retrieved context to formulate a clear, concise, and accurate answer. "
-        "If the context does not contain the answer, state that the information is not available in the textbook. "
-        "Do not use any prior knowledge outside of the provided context."
-    ),
-    tools=[rag_search]
-)
-
-# 4. Define the runner configuration
-run_config = RunConfig(
-    model=model,
-    model_provider=external_client,
-    tracing_disabled=True  # Set to False for debugging if needed
-)
+# Configure Google Generative AI
+genai.configure(api_key=Config.GEMINI_API_KEY)
 
 async def run_agent(query: str) -> str:
-    """Runs the agent with the given query and returns the final output."""
-    result = await Runner.run(textbook_tutor_agent, input=query, run_config=run_config)
-    # The `openai-agents` Runner doesn't stream the final answer, it returns a complete result.
-    return result.final_output
+    """
+    Runs the agent with the given query and returns the final output.
+    This function implements a RAG-based agent that searches the textbook
+    for relevant context before answering the user's question.
+    """
+    try:
+        # First, search the RAG database for relevant context
+        context = await rag_search(query)
+
+        # Prepare the prompt with context
+        system_instruction = (
+            "You are a helpful AI assistant and expert tutor for a Humanoid Robotics textbook. "
+            "Your goal is to answer the user's questions based on the provided context from the textbook. "
+            "Use the retrieved context to formulate a clear, concise, and accurate answer. "
+            "If the context does not contain the answer, state that the information is not available in the textbook. "
+            "Do not use any prior knowledge outside of the provided context."
+        )
+
+        if context and context != "No relevant context found.":
+            prompt = f"""
+            {system_instruction}
+
+            Context from textbook:
+            {context}
+
+            User's question: {query}
+
+            Please provide a detailed answer based on the context provided.
+            """
+        else:
+            prompt = f"""
+            {system_instruction}
+
+            User's question: {query}
+
+            Note: No relevant context was found in the textbook for this question.
+            Please acknowledge this limitation.
+            """
+
+        # Initialize the model
+        model = genai.GenerativeModel(
+            model_name=Config.MODEL_NAME,
+            system_instruction=system_instruction
+        )
+
+        # Generate content
+        response = await model.generate_content_async(prompt)
+
+        # Return the response text
+        return response.text if response.text else "I couldn't generate a response based on the provided context."
+
+    except Exception as e:
+        print(f"Error in run_agent: {str(e)}")
+        return f"Sorry, I encountered an error processing your request: {str(e)}"

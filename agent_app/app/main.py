@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI, Request
 from fastapi.responses import StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -16,7 +17,6 @@ app = FastAPI(
 # This is crucial for allowing your Vercel frontend to communicate with this API.
 # You should restrict the origins to your actual Vercel deployment URL in production.
 # For Railway deployment, we'll use environment variable to configure allowed origins
-import os
 allowed_origins = os.getenv("ALLOWED_ORIGINS", "").split(",") if os.getenv("ALLOWED_ORIGINS") else []
 # Add default origins for local development and production
 origins = [
@@ -43,13 +43,44 @@ async def chat_with_agent(request: ChatRequest):
     Endpoint to chat with the TextbookTutorAgent.
     It takes a query and returns the agent's final answer.
     """
-    # The openai-agents Runner returns the full response, not a stream.
-    final_answer = await run_agent(request.query)
-    return {"response": final_answer}
+    try:
+        print(f"Received query: {request.query[:50]}...")  # Log first 50 chars
+        final_answer = await run_agent(request.query)
+        print(f"Returning response: {final_answer[:50]}...")  # Log first 50 chars
+        return {"response": final_answer}
+    except Exception as e:
+        print(f"Error in chat endpoint: {str(e)}")
+        return {"response": f"Error processing your request: {str(e)}"}
 
 @app.get("/health")
 async def health_check():
-    return {"status": "ok"}
+    """
+    Health check endpoint to verify the application is running
+    """
+    try:
+        # Verify configuration is loaded
+        Config.validate()
+        return {
+            "status": "healthy",
+            "service": "Humanoid Robotics Textbook Tutor Agent",
+            "version": "1.0.0"
+        }
+    except Exception as e:
+        return {
+            "status": "unhealthy",
+            "error": str(e)
+        }
+
+@app.get("/config")
+async def get_config():
+    """
+    Configuration endpoint for frontend apps to fetch API settings
+    """
+    return {
+        "api_url": "/agent/chat",  # Relative path for internal use
+        "service": "Humanoid Robotics Textbook Tutor Agent",
+        "version": "1.0.0"
+    }
 
 if __name__ == "__main__":
     # Ensure all configurations are valid before starting the app
@@ -58,7 +89,11 @@ if __name__ == "__main__":
         print("Configuration validated successfully.")
     except ValueError as e:
         print(f"Configuration Error: {e}")
-        exit(1)
+        # Don't exit in production, let Railway handle it
+        import sys
+        if "pytest" not in sys.modules:  # Only exit if not running tests
+            exit(1)
 
     # You can run this file directly for testing, but typically uvicorn is started from the command line
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)

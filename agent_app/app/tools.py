@@ -1,19 +1,21 @@
-from typing import List, Dict
+from typing import List
 import google.generativeai as genai
 from qdrant_client import QdrantClient
-from qdrant_client.http.models import models
 from app.config import Config
-
-# Configure Google Generative AI
-genai.configure(api_key=Config.GOOGLE_API_KEY)
+import asyncio
 
 async def get_embeddings(text: str) -> List[float]:
     """Generates embeddings for the given text using the specified model."""
     try:
-        response = genai.embed_content(
-            model=Config.EMBEDDING_MODEL,
-            content=text,
-            task_type="RETRIEVAL_QUERY"
+        # Using synchronous call in an async wrapper to avoid async issues with genai
+        loop = asyncio.get_event_loop()
+        response = await loop.run_in_executor(
+            None,
+            lambda: genai.embed_content(
+                model=Config.EMBEDDING_MODEL,
+                content=text,
+                task_type="RETRIEVAL_QUERY"
+            )
         )
         return response["embedding"]
     except Exception as e:
@@ -30,7 +32,12 @@ async def rag_search(query: str) -> str:
     Returns the top 3 chunk texts as context.
     """
     try:
-        qdrant_client = QdrantClient(url=Config.QDRANT_URL, api_key=Config.QDRANT_API_KEY)
+        # Initialize Qdrant client
+        qdrant_client = QdrantClient(
+            url=Config.QDRANT_URL,
+            api_key=Config.QDRANT_API_KEY,
+            timeout=30  # Add timeout to prevent hanging
+        )
 
         # Generate embeddings for the query
         query_embedding = await get_embeddings(query)
@@ -39,16 +46,20 @@ async def rag_search(query: str) -> str:
         search_result = qdrant_client.search(
             collection_name=Config.QDRANT_COLLECTION_NAME,
             query_vector=query_embedding,
-            limit=3 # Return top 3 results
+            limit=3  # Return top 3 results
         )
 
-        context_texts = [hit.payload["text"] for hit in search_result if "text" in hit.payload]
+        # Extract text from search results
+        context_texts = []
+        for hit in search_result:
+            if hit.payload and "text" in hit.payload:
+                context_texts.append(hit.payload["text"])
 
         if not context_texts:
-            return "No relevant context found."
+            return "No relevant context found in the textbook."
 
         return "\n\n".join(context_texts)
 
     except Exception as e:
         print(f"Error during RAG search: {e}")
-        return f"An error occurred during RAG search: {e}"
+        return f"An error occurred during RAG search: {str(e)}"

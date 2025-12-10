@@ -1,7 +1,6 @@
 fastapi
 uvicorn[standard]
 qdrant-client
-openai-agents
 google-generativeai
 python-dotenv
 pydantic
